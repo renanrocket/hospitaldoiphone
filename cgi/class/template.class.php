@@ -414,7 +414,7 @@ class template{
 
 			$sql_sistema_ferramenta = new TSqlSelect;
 			$sql_sistema_ferramenta->setEntity('sistema_ferramentas');
-			$sql_sistema_ferramenta->addColumn('id as id_sistema_ferramentas, agrupamento');
+			$sql_sistema_ferramenta->addColumn('id as id_sistema_ferramentas, agrupamento, nome, link');
 			$sql_sistema_ferramenta->setCriteria($criterio);
 
 			$result_sistema_ferramenta = $conn->query($sql_sistema_ferramenta->getInstruction());
@@ -437,44 +437,55 @@ class template{
 					$menu = 'class="active"';
 				}else{
 					$menu = null;
-				}					
-				$cod.='<li '.$menu.'><a href="#"><i class="fa fa-circle-o"></i> '.$agrupamento.'<i class="fa fa-angle-left pull-right"></i></a>';
-				$cod.='<ul class="treeview-menu">';
+				}
 
-				$criterio = new TCriteria;
-				$criterio->add(new TFilter('agrupamento', '=', $agrupamento));
+				if($nome){
 
-				$sql = new TSqlSelect;
-				$sql->setEntity('sistema_ferramentas');
-				$sql->addColumn('id as id_sistema_ferramentas');
-				$sql->setCriteria($criterio);
-				$result_agrupamento = $conn->query($sql->getInstruction());
-
-				for($j = 0; $j < $result_agrupamento->rowCount(); $j++){
-
-					extract($result_agrupamento->fetch(PDO::FETCH_ASSOC));
+					$cod.='<li '.$menu.'><a href="#"><i class="fa fa-circle-o"></i> '.$agrupamento.'<i class="fa fa-angle-left pull-right"></i></a>';
+					$cod.='<ul class="treeview-menu">';
 
 					$criterio = new TCriteria;
-					$criterio->add(new TFilter('id_usuario', '=', $id_usuario));
-					$criterio->add(new TFilter('id_sistema_ferramentas', '=', $id_sistema_ferramentas));
+					$criterio->add(new TFilter('agrupamento', '=', $agrupamento));
 
 					$sql = new TSqlSelect;
-					$sql->setEntity('usuario_credenciais');
-					$sql->addColumn('id_sistema_ferramentas as ferramenta');
+					$sql->setEntity('sistema_ferramentas');
+					$sql->addColumn('id as id_sistema_ferramentas');
 					$sql->setCriteria($criterio);
+					$result_agrupamento = $conn->query($sql->getInstruction());
 
-					$result = $conn->query($sql->getInstruction());
-					if($result->rowCount()){
-						extract($result->fetch(PDO::FETCH_ASSOC));
-						$link = registro($ferramenta, 'sistema_ferramentas', 'link');
-						$nome = registro($ferramenta, 'sistema_ferramentas', 'nome');
-						$cod.='<li><a href="'.$link.'"><i class="fa fa-circle-o"></i>'.$nome.'</a></li>';
+					for($j = 0; $j < $result_agrupamento->rowCount(); $j++){
+
+
+						extract($result_agrupamento->fetch(PDO::FETCH_ASSOC));
+
+						$criterio = new TCriteria;
+						$criterio->add(new TFilter('id_usuario', '=', $id_usuario));
+						$criterio->add(new TFilter('id_sistema_ferramentas', '=', $id_sistema_ferramentas));
+
+						$sql = new TSqlSelect;
+						$sql->setEntity('usuario_credenciais');
+						$sql->addColumn('id_sistema_ferramentas as ferramenta');
+						$sql->setCriteria($criterio);
+
+						$result = $conn->query($sql->getInstruction());
+						if($result->rowCount()){
+							extract($result->fetch(PDO::FETCH_ASSOC));
+							$link = registro($ferramenta, 'sistema_ferramentas', 'link');
+							$nome = registro($ferramenta, 'sistema_ferramentas', 'nome');
+							$cod.='<li><a href="'.$link.'"><i class="fa fa-circle-o"></i>'.$nome.'</a></li>';
+						}
+
 					}
 
+					$cod.='</ul></li>';
+
+				}else{
+					$cod.='<li '.$menu.'><a href="'.$link.'"><i class="fa fa-circle-o"></i> '.$agrupamento.'<i class="fa fa-angle-left pull-right"></i></a>';
 				}
 
 
-				$cod.='</ul></li>';
+
+				
 
 				
 			}
