@@ -33,6 +33,7 @@ if($result->rowCount()){
 	$sql->addColumn('referido');
 	$sql->addColumn('valor as total');
 	$sql->addColumn('ja_pago');
+	$sql->addColumn('filial_id');
 	$sql->setCriteria($criterio);
 	$result = $conn->query($sql->getInstruction());
 
@@ -66,7 +67,7 @@ if($result->rowCount()){
 		}elseif($tabela_referente=='venda'){
 			
 			$criterio = new TCriteria();
-			$criterio->add(new TFilter('id', '=', $referido));
+			$criterio->add(new TFilter('venda_id', '=', $referido));
 
 			$sql = new TSqlSelect();
 			$sql->setEntity('venda_itens');
@@ -167,6 +168,10 @@ if(isset($_COOKIE['email'])){
 	$vezes = 1;
 }
 
+$endereco = registro($filial_id, 'filiais', 'endereco').', '.registro($filial_id, 'filiais', 'numero').' '.registro($filial_id, 'filiais', 'bairro').' - '.registro(registro($filial_id, 'filiais', 'cidade'), 'localidade_cidades', 'nome', 'cod_cidades').' '.registro(registro($filial_id, 'filiais', 'estado'), 'localidade_estados', 'sigla', 'cod_estados');
+$telefone_1 = registro($filial_id, 'filiais', 'telefone_1');
+$telefone_2 = registro($filial_id, 'filiais', 'telefone_2');
+$filial = registro($filial_id, 'filiais', 'nome');
 
 ?>
 

@@ -14,7 +14,9 @@ if(isset($id))
 
 $conn = TConnection::open(DB);
 
-
+$criterio = new TCriteria();
+$criterio->add(new TFilter('id', '>', 1));
+$criterio->setProperty('order', 'nome');
 
 $sql = new TSqlSelect;
 $sql->setEntity('filiais');
@@ -22,6 +24,7 @@ $sql->addColumn('id');
 $sql->addColumn('nome');
 $sql->addColumn('telefone_1');
 $sql->addColumn('telefone_2');
+$sql->setCriteria($criterio);
 
 
 $result = $conn->query($sql->getInstruction());

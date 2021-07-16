@@ -185,6 +185,7 @@ if(!isset($op)){
 
 }elseif($op=='visualizar'){
 
+
     if(!is_numeric($id))
         $id = base64_decode($id);
 
@@ -202,7 +203,16 @@ if(!isset($op)){
         $popup = null;
     }
 
+    
+
     $op = 'editar';
+
+    if($estado==''){
+        $estado = 6;
+    }
+    if($cidade==''){
+        $cidade = 1722;
+    }
 
 }
 
@@ -267,7 +277,7 @@ for($i=0; $i<$result->rowCount(); $i++){
 $form->colspan = 4;
 $cod = '
         function showCidade(valor){
-            $.post("inc/ajax_inputECC.inc", {
+            $.post("inc/ajax_inputECC.inc.php", {
                 op : "cidade",
                 id_estado : valor
             }, function(data) {
@@ -279,12 +289,12 @@ $cod = '
         }   ';
 $form->set_js($cod, 'onchange="showCidade(this.value)"');
 $form->div_id = 'estado';
-$form->set_arg('select2', 'Estado', $estados, $estado);
+$form->set_arg('select', 'Estado', $estados, $estado);
 
 $form->colspan = 4;
 $cod = '
         function showCep(valor){
-            $.post("inc/ajax_inputECC.inc", {
+            $.post("inc/ajax_inputECC.inc.php", {
                 op : "cep",
                 id_cidade : valor
             }, function(data) {
@@ -295,7 +305,7 @@ $cod = '
         }   ';
 $form->set_js($cod, 'onchange="showCep(this.value)"');
 $form->div_id = 'cidade';
-$form->set_arg('select2', 'Cidade', $cidades, $cidade);
+$form->set_arg('select', 'Cidade', $cidades, $cidade);
 
 $criterio = new TCriteria();
 $criterio->add(new TFilter('cod_cidades', '=', $cidade));

@@ -24,6 +24,11 @@ if($result->rowCount()){
 
 $status == 1 ? $tipo = 'Pedido' : $tipo = 'Orçamento';
 
+$endereco = registro($filial_id, 'filiais', 'endereco').', '.registro($filial_id, 'filiais', 'numero').' '.registro($filial_id, 'filiais', 'bairro').' - '.registro(registro($filial_id, 'filiais', 'cidade'), 'localidade_cidades', 'nome', 'cod_cidades').' '.registro(registro($filial_id, 'filiais', 'estado'), 'localidade_estados', 'sigla', 'cod_estados');
+$telefone_1 = registro($filial_id, 'filiais', 'telefone_1');
+$telefone_2 = registro($filial_id, 'filiais', 'telefone_2');
+$filial = registro($filial_id, 'filiais', 'nome');
+
 ?>
 
 <!DOCTYPE html>
