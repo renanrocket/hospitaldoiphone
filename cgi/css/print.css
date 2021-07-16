@@ -1,0 +1,70 @@
+#menuBasico, #barraPrincipal, #imgMenuBg, #cbp-tm-menu, #contatos, #retorno{
+	display: none;
+}
+#divTop{
+	width: 100%;
+	position: absolute;
+}
+.aSubmit, input, select, textarea{
+	border:none;
+	background:none;
+	color: black;
+	font-size: 10px;
+}
+#copy, #naoImp{
+	display: none;
+}
+#imp{
+	display: inline-block;
+	border: none;
+}
+body, body center, #gradient-style, form {
+	padding: 0px;
+	margin: 0;
+	color: black;
+	border-collapse: separate;
+	background-color: white;
+}
+a{
+	color: black;
+}
+table {
+	border-collapse: separate;
+}
+tr{
+	padding: 3px;
+	margin: 3px;
+}
+td{
+	padding: 2px;
+	margin: 2px;
+}
+
+#gradient-style{
+	width: 100%;
+}
+#gradient-style th {
+	background-image: none;
+	background-color: black;
+	color: white;
+	padding: 3px;
+	border:none;
+	border-radius: 5px;
+}
+#gradient-style td, #gradient-style tfoot tr td, #gradient-style tbody tr:hover td{
+	background-image: none;
+	background-color: white;
+	color: black;
+	padding: 3px;
+	border: solid 1px black;
+	border-radius: 5px;
+}
+.aSubmit, input[type="submit"], input[type="reset"]{
+	background-color: white;
+	border: none;
+	color: black;
+}
+.checkbox{
+	display: inline-block;
+}
+

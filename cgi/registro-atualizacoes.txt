@@ -1,0 +1,8 @@
+--------------------------------------------------
+Registro do dia 14/01/2020 14:31:59
+Total arquivos 3408
+Total linhas de codigo: 39935
+--------------------------------------------------
+Registro do dia 25/04/2020 10:37:45
+Total arquivos 3416
+Total linhas de codigo: 41278
