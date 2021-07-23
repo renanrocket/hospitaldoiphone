@@ -129,7 +129,7 @@ if(!isset($op)){
 		extract($result->fetch(PDO::FETCH_ASSOC));
 		$tabela_referente = registro($id, 'conta', 'tabela_referente');
 		$referido = registro($conta_id, 'conta', 'referido');
-		echo $id.' - '.$referido.'<br>';
+		
 		
 		if($tabela_referente=='venda'){
 			$prefixo = 'Venda ';
@@ -191,7 +191,7 @@ if(!isset($op)){
 	$entries[0][] = 'R$ 138,00';
 	*/
 
-	echo dump($entries);
+	
 	
 }else{
 

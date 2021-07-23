@@ -60,11 +60,13 @@ for($i = $totalOS = $totalOSAmarelo = $totalOSVerde = $totalOSVermelho = 0; $i<$
             $entries[$j][1] = $nome.'<br>';
             
             if($wpp){
+                $wpp = str_replace('_', '', $wpp);
                 $telefone = $wpp;
                 $wpp = str_replace('(', '', $wpp);
                 $wpp = str_replace(')', '', $wpp);
                 $wpp = str_replace(' ', '', $wpp);
                 $wpp = str_replace('.', '', $wpp);
+
                 $wpp = 'https://api.whatsapp.com/send?phone=55'.$wpp;
                 $entries[$j][1] .= ' <a class="btnImp btn btn-danger" target="blank_" href="'.$wpp.'">'.$telefone.'</a>';
                 
